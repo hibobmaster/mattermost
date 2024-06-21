@@ -30,7 +30,7 @@ endef
 
 IS_CI ?= false
 # Build Flags
-BUILD_NUMBER ?= $(BUILD_NUMBER:)
+BUILD_NUMBER = $(shell git rev-parse HEAD)
 BUILD_DATE = $(shell date -u)
 BUILD_HASH = $(shell git rev-parse HEAD)
 BUILD_TAGS =
