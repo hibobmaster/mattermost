@@ -12,7 +12,7 @@ WORKDIR /build
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y build-essential
 COPY . .
-RUN npm config set fetch-retry-mintimeout 100000 && npm config set fetch-retry-maxtimeout 600000
+RUN npm install -g npm@latest
 RUN cd webapp && make package 
 
 FROM ubuntu:jammy as runner
@@ -20,7 +20,7 @@ FROM ubuntu:jammy as runner
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Some ENV variables
-ENV PATH="/mattermost/bin:${PATH}"
+ENV PATH="/mattermost:${PATH}"
 ARG PUID=2000
 ARG PGID=2000
 
