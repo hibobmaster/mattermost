@@ -30,7 +30,7 @@ endef
 
 IS_CI ?= false
 # Build Flags
-BUILD_NUMBER = $(shell git rev-parse HEAD)
+BUILD_NUMBER ?= $(BUILD_NUMBER:)
 BUILD_DATE = $(shell date -u)
 BUILD_HASH = $(shell git rev-parse HEAD)
 BUILD_TAGS =
@@ -41,7 +41,7 @@ export COMPOSE_PROJECT_NAME=mattermost-server
 
 # If we don't set the build number it defaults to dev
 ifeq ($(BUILD_NUMBER),)
-	BUILD_DATE := n/a
+	BUILD_DATE := $(BUILD_DATE)
 	BUILD_NUMBER := dev
 endif
 
